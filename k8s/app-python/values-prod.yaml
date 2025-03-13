@@ -1,0 +1,30 @@
+replicaCount: 3
+
+image:
+  repository: ramilevna/app_python
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: LoadBalancer
+  port: 80
+
+env:
+  - name: ENV_VAR_1
+    value: "some_value"
+  - name: ENV_VAR_2
+    value: "another_value"
+
+resources:
+  limits:
+    cpu: "1000m"
+    memory: "1024Mi"
+  requests:
+    cpu: "500m"
+    memory: "512Mi"
+
+autoscaling:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
